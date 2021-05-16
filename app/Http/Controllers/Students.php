@@ -55,4 +55,49 @@ class Students extends Controller
         // echo "<pre>"; print_r($data); die;
         return $data;
      }
+
+     public function getFirstLayout(){
+         return view('student-record');
+     }
+
+     public function getSecondLayout(){
+         return view('student-list');
+     }
+
+     public function createSession(Request $request){
+         $data = [
+             'user_id'=>12,
+             'user_name'=>'vishnu'
+         ];
+          //session($data);
+          $request->session()->put($data);
+          $messageArray = [
+              'msg'=>'Added Successfully',
+              'class'=>'alert alert-success'
+          ];
+          $request->session()->flash('message',$messageArray);
+        echo "create Session";
+    }
+
+    public function showSession(Request $request){
+      //  echo "<pre>"; print_r($request->session()->all());
+       echo $request->session()->get('user_name');
+      //  echo session('user_id').'=='.session('user_name');
+        echo "show Session";
+        if($request->session()->has('user_id')){
+            echo "Yes Set";
+        }
+        if($request->session()->has('message')){
+            echo session('message')['msg'];
+        }
+       
+       // echo "<pre>"; print_r(session('message'));
+        return view('student-list');
+    }
+
+    public function deleteSession(Request $request){
+         $request->session()->flush();
+        //$request->session()->forget(['user_id','user_name']);
+        echo "delete Session";
+    }
 }

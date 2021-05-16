@@ -47,3 +47,10 @@ Route::redirect('/testdata','information');
 Route::get('api-list',[students::class,'getApiListData']);
 Route::get('list',[students::class,'getListData']);
 
+Route::get('layout',[students::class,'getFirstLayout']);
+Route::get('layout-second',[students::class,'getSecondLayout']);
+
+Route::get('create-session',[students::class,'createSession']);
+Route::get('show-session',[students::class,'showSession']);
+Route::get('delete-session',[students::class,'deleteSession']);
+
