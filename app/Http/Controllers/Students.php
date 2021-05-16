@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Student;
+use Illuminate\Support\Facades\Http;
 
-class student extends Controller
+class Students extends Controller
 {
     public function getListData(){
-        $data = DB::select('select * from user_info');
+        $data = DB::connection('mysql')->select('select * from user_info');
+       //$data = Student::all();
+     //  $data = Student::find(1);
         return $data;
     }
 
@@ -44,5 +48,11 @@ class student extends Controller
 
     public function userinfodata($name , $sid){
         echo "username is ".$name.$sid;
+     }
+
+     public function getApiListData(){
+        $data=Http::get('https://reqres.in/api/unknown');
+        // echo "<pre>"; print_r($data); die;
+        return $data;
      }
 }
